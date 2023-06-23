@@ -78,17 +78,22 @@ public class PostDao extends DaoBase{
 
     /** Buscador **/
 
-    public ArrayList<Post> buscarPorTitle(String title) {
+    public ArrayList<Post> buscarPost(String textoBuscar1) {
         ArrayList<Post> lista = new ArrayList<>();
 
 
-        String sql = "select * from post p left join employees e on p.employee_id = e.employee_id\n" +
-                "where title like ?";
+        String sql = "SELECT *\n" +
+                "FROM post p\n" +
+                "LEFT JOIN employees e ON p.employee_id = e.employee_id\n" +
+                "WHERE p.title LIKE ? or p.content LIKE ? or e.first_name LIKE ? or e.last_name LIKE ?";
 
         try (Connection connection = this.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, "%" + title + "%");
+            preparedStatement.setString(1, "%" + textoBuscar1 + "%");
+            preparedStatement.setString(2, "%" + textoBuscar1 + "%");
+            preparedStatement.setString(3, "%" + textoBuscar1 + "%");
+            preparedStatement.setString(4, "%" + textoBuscar1 + "%");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -98,14 +103,14 @@ public class PostDao extends DaoBase{
                     post.setTitle(resultSet.getString(2));
                     post.setContent(resultSet.getString(3));
                     post.setEmployeeId(resultSet.getInt(4));
-
+                    post.setDatetime(resultSet.getTimestamp(5));
 
                     Employee employee = new Employee();
                     employee.setEmployeeId(resultSet.getInt("e.employee_id"));
                     employee.setFirstName(resultSet.getString("e.first_name"));
                     employee.setLastName(resultSet.getString("e.last_name"));
                     post.setEmployee(employee);
-
+                    lista.add(post);
 
                 }
             }

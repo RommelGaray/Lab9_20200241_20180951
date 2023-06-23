@@ -26,13 +26,16 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("p") == null ? "crear" : request.getParameter("p");
+        String action = request.getParameter("p") == null ? "b1" : request.getParameter("p");
+
+        PostDao postDao = new PostDao();
 
         switch (action) {
+
             case "b1":
-                String textoBuscar1 = request.getParameter("buscador");
-                request.setAttribute("lista", usuarioJuegosDaos.buscarPorTitle(textoBuscar1));
-                request.getRequestDispatcher("usuario/indexUsuarioOficial.jsp").forward(request, response);
+                String textoBuscar1 = request.getParameter("textoBuscar");
+                request.setAttribute("posts", postDao.buscarPost(textoBuscar1));
+                request.getRequestDispatcher("home.jsp").forward(request, response);
                 break;
         }
 
