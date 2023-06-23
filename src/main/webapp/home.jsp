@@ -21,14 +21,25 @@
         <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
             <a href="<%= request.getContextPath()%>/PostServlet?action=new" class="btn btn-primary">New Post</a>
         </div>
+
+        <form method="post" action="<%=request.getContextPath()%>/HomeServlet?p=b1">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" placeholder="Buscador" name="textoBuscar">
+                <label>Buscar post</label>
+            </div>
+            <div>
+                <a href="<%= request.getContextPath()%>/HomeServlet" class="btn btn-primary">Limpiar</a>
+            </div>
+        </form>
     </div>
     <div class="row">
         <%for (Post p : posts) {%>
         <div class="col-sm-4 py-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title"><%= p.getTitle()%></h5>
+                    <h4 class="card-title"><%= p.getTitle()%></h4>
                     <h6 class="card-subtitle mb-2 text-muted"><%= p.getEmployee().getFirstName() + p.getEmployee().getLastName()%></h6>
+                    <p class="card-subtitle mb-2 text-muted"><%=p.getDatetime()%></p>
                     <p class="card-text"><%= p.getContent()%></p>
                     <a href="<%= request.getContextPath()%>/PostServlet?action=view&id=<%=p.getPostId()%>" class="btn btn-primary">View</a>
                 </div>
