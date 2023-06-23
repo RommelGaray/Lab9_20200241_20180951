@@ -124,4 +124,31 @@ public class PostDao extends DaoBase{
     }
 
 
+    public ArrayList<Post> detallesPost(){
+
+        ArrayList<Post> lista = new ArrayList<>();
+        String sql1 = "SELECT p.* ,count(c.comment) FROM post p left join comments c on p.post_id=c.post_id group by p.post_id";
+
+        try (Connection connection = this.getConection();
+             Statement stmt = connection.createStatement();
+             ResultSet resultSet = stmt.executeQuery(sql1)) {
+
+            while(resultSet.next()){
+                Post post = new Post();
+                post.setPostId(resultSet.getInt(1));
+                post.setDatetime(resultSet.getTimestamp(5));
+                post.setCantidad(resultSet.getInt(6));
+
+
+                lista.add(post);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return lista;
+    }
+
+
 }

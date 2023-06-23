@@ -17,11 +17,20 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view;
 
+        String action = request.getParameter("a") == null ? "index" : request.getParameter("a");
+
         PostDao postDao = new PostDao();
 
-        request.setAttribute("posts", postDao.listPosts());
-        view = request.getRequestDispatcher("home.jsp");
-        view.forward(request, response);
+        switch (action) {
+            case "index":
+                request.setAttribute("posts", postDao.listPosts());
+                request.setAttribute("datos", postDao.detallesPost());
+                view = request.getRequestDispatcher("home.jsp");
+                view.forward(request, response);
+                break;
+        }
+
+
     }
 
     @Override

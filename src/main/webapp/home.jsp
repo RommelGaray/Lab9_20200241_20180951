@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList" %>
 <%@ page import="pe.edu.pucp.tel131lab9.bean.Post" %>
 <jsp:useBean id="posts" type="java.util.ArrayList<pe.edu.pucp.tel131lab9.bean.Post>" scope="request"/>
+<jsp:useBean id="datos" type="java.util.ArrayList<pe.edu.pucp.tel131lab9.bean.Post>" scope="request"/>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,7 @@
                     <p class="card-subtitle mb-2 text-muted"><%=p.getDatetime()%></p>
                     <p class="card-text"><%= p.getContent()%></p>
                     <a href="<%= request.getContextPath()%>/PostServlet?action=view&id=<%=p.getPostId()%>" class="btn btn-primary">View</a>
+                    <p><%=%></p>
                 </div>
             </div>
         </div>
