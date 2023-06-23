@@ -1,5 +1,6 @@
 package pe.edu.pucp.tel131lab9.controller.admin;
 
+import com.mysql.cj.Session;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,6 +25,10 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
 
+        //if (SESSION_NAME = null) {
+            request.getRequestDispatcher("loginPage.jsp");
+            return;
+        }
         RequestDispatcher view;
         EmployeeDao employeeDao = new EmployeeDao();
         JobDao jobDao = new JobDao();

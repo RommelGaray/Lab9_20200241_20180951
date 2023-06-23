@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 
                 if(employee.getEmployeeId()>0){
                     resp.sendRedirect(req.getContextPath() + "/EmployeeServlet");
+
                 }else{
                     RequestDispatcher dispatcher = req.getRequestDispatcher("loginPage.jsp");
                     dispatcher.forward(req, resp);
