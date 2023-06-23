@@ -23,7 +23,7 @@ public class HomeServlet extends HttpServlet {
         view = request.getRequestDispatcher("home.jsp");
         view.forward(request, response);
     }
-
+/*
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("p") == null ? "crear" : request.getParameter("p");
@@ -37,4 +37,6 @@ public class HomeServlet extends HttpServlet {
         }
 
     }
+
+ */
 }

@@ -119,4 +119,19 @@ public class PostDao extends DaoBase{
     }
 
 
+    public void nuevoPost(Post post){
+        String sql = "INSERT into post (title,content,employee_id,datetime) values (?,?,?,now()) ";
+
+        try(Connection connection = getConnection();
+        PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1,post.getTitle());
+            pstmt.setString(2,post.getContent());
+            pstmt.setInt(3,post.getEmployeeId());
+
+        }
+        catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
 }
