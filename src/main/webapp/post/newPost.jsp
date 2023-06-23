@@ -18,24 +18,24 @@
         <div class="col-md-7">
             <h1>New Post</h1>
         </div>
-        <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
-            <a href="<%= request.getContextPath()%>/PostServlet?action=new" class="btn btn-primary">New Post</a>
-        </div>
     </div>
-    <div class="row">
-        <%for (Post p : posts) {%>
-        <div class="col-sm-4 py-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title"><%= p.getTitle()%></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><%= p.getEmployeeId()%></h6>
-                    <p class="card-text"><%= p.getContent()%></p>
-                    <a href="#" class="btn btn-primary">View</a>
-                </div>
+
+    <div class="tabla">
+        <form method="POST" action="<%=request.getContextPath()%>/PostServlet?a=new">
+            <div class="mb-3">
+                <label class='text-light' for="title">titulo</label>
+                <input type="text" class="form-control" name="title" id="title">
             </div>
-        </div>
-        <%}%>
+            <div class="mb-3">
+                <label class='text-light' for="content">Contenido</label>
+                <input type="text" class="form-control" name="content" id="content">
+            </div>
+            <a class="btn btn-danger" href="<%=request.getContextPath()%>/">Cancelar</a>
+            <button type="submit" class="btn btn-light">Guardar</button>
+        </form>
     </div>
+
+
     <jsp:include page="../includes/footer.jsp"/>
 </div>
 </body>

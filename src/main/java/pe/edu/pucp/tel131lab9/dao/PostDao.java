@@ -124,12 +124,13 @@ public class PostDao extends DaoBase{
     }
 
 
+
     public ArrayList<Post> detallesPost(){
 
         ArrayList<Post> lista = new ArrayList<>();
         String sql1 = "SELECT p.* ,count(c.comment) FROM post p left join comments c on p.post_id=c.post_id group by p.post_id";
 
-        try (Connection connection = this.getConection();
+        try (Connection connection = getConnection();
              Statement stmt = connection.createStatement();
              ResultSet resultSet = stmt.executeQuery(sql1)) {
 
@@ -137,7 +138,7 @@ public class PostDao extends DaoBase{
                 Post post = new Post();
                 post.setPostId(resultSet.getInt(1));
                 post.setDatetime(resultSet.getTimestamp(5));
-                post.setCantidad(resultSet.getInt(6));
+
 
 
                 lista.add(post);
@@ -150,5 +151,22 @@ public class PostDao extends DaoBase{
         return lista;
     }
 
+
+
+    public void nuevoPost(Post post){
+        String sql = "INSERT into post (title,content,employee_id,datetime) values (?,?,?,now()) ";
+
+        try(Connection connection = getConnection();
+        PreparedStatement pstmt = connection.prepareStatement(sql)){
+
+            pstmt.setString(1,post.getTitle());
+            pstmt.setString(2,post.getContent());
+            pstmt.setInt(3,post.getEmployeeId());
+
+        }
+        catch (SQLException ex){
+            throw new RuntimeException(ex);
+        }
+    }
 
 }

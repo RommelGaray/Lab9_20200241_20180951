@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
 
 
     }
-
+/*
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("p") == null ? "b1" : request.getParameter("p");
@@ -49,4 +49,6 @@ public class HomeServlet extends HttpServlet {
         }
 
     }
+
+ */
 }
